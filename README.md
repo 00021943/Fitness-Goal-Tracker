@@ -9,7 +9,7 @@ Fitness Goal Tracker is a web application that helps users track and manage thei
 ## Links
 
 - GitHub Repository: [https://github.com/00021943/Fitness-Goal-Tracker](https://github.com/00021943/Fitness-Goal-Tracker)
-- Hosted Application: [https://fitness-goal-tracker.glitch.me](https://fitness-goal-tracker.glitch.me)
+- Hosted Application: [https://ozod-fitness.bytogo.uz/](https://ozod-fitness.bytogo.uz/)
 
 ## How to Run the Application Locally
 
@@ -52,6 +52,7 @@ Before running the application, make sure you have the following installed:
    ```plaintext
    PORT=3001
    JWT_SECRET=secret
+   NODE_ENV=production | dev
    ```
 
 5. **Start the application for development**
