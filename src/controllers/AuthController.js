@@ -45,12 +45,8 @@ class AuthController {
             // Generate JWT token
             const token = this.authService.generateToken(user)
 
-            // Set token in cookie
-            res.cookie("token", token, {
-                httpOnly: true,
-                maxAge: 24 * 60 * 60 * 1000, // 1 day
-                secure: process.env.NODE_ENV === "production",
-            })
+            // Set token in cookie using the private method
+            this.#setTokenInCookie(res, token);
 
             res.setMessage("success", "Registration successful! Welcome!")
             res.redirect("/dashboard")
@@ -96,12 +92,8 @@ class AuthController {
             // Generate JWT token
             const token = this.authService.generateToken(user)
 
-            // Set token in cookie
-            res.cookie("token", token, {
-                httpOnly: true,
-                maxAge: 24 * 60 * 60 * 1000, // 1 day
-                secure: false,
-            })
+            // Set token in cookie using the private method
+            this.#setTokenInCookie(res, token);
 
             res.setMessage("success", "Login successful!")
             res.redirect("/dashboard")
@@ -121,6 +113,15 @@ class AuthController {
 
         res.setMessage("success", "You have been successfully logged out")
         res.redirect("/")
+    }
+
+    // Private method to set token in cookies
+    #setTokenInCookie(res, token) {
+        res.cookie("token", token, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+            secure: process.env.NODE_ENV === "production",
+        });
     }
 }
 
