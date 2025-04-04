@@ -34,7 +34,7 @@ Before running the application, make sure you have the following installed:
    After cloning the repository, navigate to the project directory:
 
    ```bash
-   cd fitness-goal-tracker
+   cd Fitness-Goal-Tracker
    ```
 
 3. **Install dependencies**
