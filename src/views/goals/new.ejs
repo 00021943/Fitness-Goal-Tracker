@@ -86,33 +86,33 @@
             <script>
                 // Set default units based on type selection
                 document.addEventListener('DOMContentLoaded', function () {
-                    const typeRadios = document.querySelectorAll('input[name="type"]');
-                    const unitInput = document.getElementById('unit');
+                    const typeRadios = document.querySelectorAll('input[name="type"]'); // Get all radio buttons for the goal type
+                    const unitInput = document.getElementById('unit'); // Get the input field for the unit
 
-                    // Функция для обновления значения в поле 'unit'
+                    // Function to update the unit field based on selected goal type
                     function updateDefaultUnit() {
-                        const selectedType = document.querySelector('input[name="type"]:checked')?.value;
+                        const selectedType = document.querySelector('input[name="type"]:checked')?.value; // Get the selected goal type
 
-                        // Обновляем значение в поле unit на основе выбранного типа
+                        // Update the unit field based on the selected goal type
                         switch (selectedType) {
-                            case 'weight':
-                                unitInput.value = 'kg';
+                            case 'weight': // If Weight Loss/Gain is selected
+                                unitInput.value = 'kg'; // Set unit to 'kg'
                                 break;
-                            case 'running':
-                                unitInput.value = 'km';
+                            case 'running': // If Running Distance is selected
+                                unitInput.value = 'km'; // Set unit to 'km'
                                 break;
-                            case 'strength':
-                                unitInput.value = 'reps';
+                            case 'strength': // If Strength Training is selected
+                                unitInput.value = 'reps'; // Set unit to 'reps'
                                 break;
-                            default:
-                                unitInput.value = ''; // Очищаем значение, если тип не выбран
+                            default: // If no goal type is selected
+                                unitInput.value = ''; // Clear the unit value
                         }
                     }
 
-                    // Устанавливаем начальное значение по умолчанию
+                    // Set the initial default value for the unit field based on the selected goal type
                     updateDefaultUnit();
 
-                    // Обновляем значение unit при изменении типа
+                    // Update the unit field whenever the goal type radio button changes
                     typeRadios.forEach(radio => {
                         radio.addEventListener('change', updateDefaultUnit);
                     });
