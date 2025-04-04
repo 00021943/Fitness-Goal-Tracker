@@ -8,7 +8,7 @@ Fitness Goal Tracker is a web application that helps users track and manage thei
 
 ## Links
 
-- GitHub Repository: [https://github.com/your-username/fitness-goal-tracker](https://github.com/your-username/fitness-goal-tracker)
+- GitHub Repository: [https://github.com/00021943/Fitness-Goal-Tracker](https://github.com/00021943/Fitness-Goal-Tracker)
 - Hosted Application: [https://fitness-goal-tracker.glitch.me](https://fitness-goal-tracker.glitch.me)
 
 ## How to Run the Application Locally
@@ -26,7 +26,7 @@ Before running the application, make sure you have the following installed:
    Open your terminal/command prompt and run:
 
    ```bash
-   git clone https://github.com/your-username/fitness-goal-tracker.git
+   git clone https://github.com/00021943/Fitness-Goal-Tracker.git
    ```
 
 2. **Navigate to the project directory**
@@ -54,15 +54,33 @@ Before running the application, make sure you have the following installed:
    JWT_SECRET=secret
    ```
 
-5. **Start the application**
+5. **Start the application for development**
 
-   Once the dependencies are installed and the `.env` file is created, start the application by running:
+   For development purposes, run the application with `node-dev` using the following command:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
-6. **Access the application**
+   This will start the application in development mode with automatic reload on code changes.
+
+6. **Run the application with Docker (for production)**
+
+   If you prefer running the app using **Docker**, follow these steps:
+
+   - **Build the Docker image**:
+   
+     ```bash
+     docker-compose build
+     ```
+
+   - **Start the application**:
+   
+     ```bash
+     docker-compose up
+     ```
+
+7. **Access the application**
 
    After starting the application, open your web browser and navigate to the following URL to access the application:
 
@@ -70,7 +88,7 @@ Before running the application, make sure you have the following installed:
 
    You should see the homepage of the application.
 
-7. **Test accounts**
+8. **Test accounts**
 
    You can use the following test accounts to log in and explore the application:
    - **Email:** test@example.com, **Password:** password
