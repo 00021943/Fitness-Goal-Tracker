@@ -62,3 +62,10 @@ function startApp() {
 
 // Start the application
 startApp();
+
+
+// Global error handler middleware
+process.on('uncaughtException', (err) => {
+    console.error("Uncaught Exception: ", err);
+    process.exit(1); // Exit with an error code
+});
