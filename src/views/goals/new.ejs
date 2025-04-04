@@ -89,31 +89,30 @@
                     const typeRadios = document.querySelectorAll('input[name="type"]');
                     const unitInput = document.getElementById('unit');
 
+                    // Функция для обновления значения в поле 'unit'
                     function updateDefaultUnit() {
-                        const selectedType = document.querySelector('input[name="type"]:checked').value;
+                        const selectedType = document.querySelector('input[name="type"]:checked')?.value;
 
-                        // Only set default if unit is empty
-                        if (unitInput.value === '') {
-                            switch (selectedType) {
-                                case 'weight':
-                                    unitInput.value = 'kg';
-                                    break;
-                                case 'running':
-                                    unitInput.value = 'km';
-                                    break;
-                                case 'strength':
-                                    unitInput.value = 'reps';
-                                    break;
-                                default:
-                                    unitInput.value = '';
-                            }
+                        // Обновляем значение в поле unit на основе выбранного типа
+                        switch (selectedType) {
+                            case 'weight':
+                                unitInput.value = 'kg';
+                                break;
+                            case 'running':
+                                unitInput.value = 'km';
+                                break;
+                            case 'strength':
+                                unitInput.value = 'reps';
+                                break;
+                            default:
+                                unitInput.value = ''; // Очищаем значение, если тип не выбран
                         }
                     }
 
-                    // Set initial default
+                    // Устанавливаем начальное значение по умолчанию
                     updateDefaultUnit();
 
-                    // Update when type changes
+                    // Обновляем значение unit при изменении типа
                     typeRadios.forEach(radio => {
                         radio.addEventListener('change', updateDefaultUnit);
                     });
