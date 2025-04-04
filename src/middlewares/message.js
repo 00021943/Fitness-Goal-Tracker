@@ -1,10 +1,11 @@
-function messageHandlerMiddleware (req, res, next) {
+function messageHandlerMiddleware(req, res, next) {
+    // Initialize message variables
     res.locals.messages = {
         success: null,
         error: null,
-    }
+    };
 
-    // Метод для установки сообщений
+    // Method to set messages
     res.setMessage = (type, message) => {
         res.locals.messages[type] = message
     }
