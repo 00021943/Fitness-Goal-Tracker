@@ -185,7 +185,3 @@ If you'd like to contribute to this project, feel free to fork the repository an
 5. Open a pull request with a description of the changes.
 
 Thank you for checking out this project!
-
----
-
-This concludes the instructions for setting up and running the **Fitness Goal Tracker** application locally. If you have any questions or need further assistance, feel free to reach out!
