@@ -1,0 +1,51 @@
+<%- include('../partials/header') %>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Login</h2>
+
+            <% if (messages.error) { %>
+                <div class="alert alert-danger">
+                    <%= messages.error %>
+                </div>
+                <% } %>
+
+                    <% if (messages.success) { %>
+                        <div class="alert alert-success">
+                            <%= messages.success %>
+                        </div>
+                        <% } %>
+
+                            <form action="/auth/login" method="POST">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        value="<%= formData.email || '' %>" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" required>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                            </form>
+
+                            <div class="auth-links">
+                                <p>Don't have an account? <a href="/auth/register">Register</a></p>
+                            </div>
+
+                            <div class="demo-accounts">
+                                <h3>Test Accounts:</h3>
+                                <ul>
+                                    <li><strong>Email:</strong> test@example.com <strong>Password:</strong> password
+                                    </li>
+                                    <li><strong>Email:</strong> demo@example.com <strong>Password:</strong> test123</li>
+                                </ul>
+                            </div>
+        </div>
+    </div>
+
+    <%- include('../partials/footer') %>

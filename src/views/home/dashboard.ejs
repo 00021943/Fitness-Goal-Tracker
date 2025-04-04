@@ -1,0 +1,158 @@
+<%- include('../partials/header') %>
+
+    <div class="dashboard-container">
+        <% if (messages.success) { %>
+            <div class="alert alert-success">
+                <%= messages.success %>
+            </div>
+            <% } %>
+
+                <div class="dashboard-header">
+                    <h1>Welcome, <%= user.name %>!</h1>
+                    <a href="/goals/new" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Goal
+                    </a>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">
+                            <%= stats.totalGoals %>
+                        </div>
+                        <div class="stat-label">Total Goals</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">
+                            <%= stats.completedGoals %>
+                        </div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">
+                            <%= stats.inProgressGoals %>
+                        </div>
+                        <div class="stat-label">In Progress</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-value">
+                            <%= stats.averageProgress %>%
+                        </div>
+                        <div class="stat-label">Avg. Progress</div>
+                    </div>
+                </div>
+
+                <% if (stats.approachingDeadlines> 0) { %>
+                    <div class="alert alert-warning">
+                        <strong>Heads up!</strong> You have <%= stats.approachingDeadlines %>
+                            <%= stats.approachingDeadlines> 1 ? 'goals' : 'goal' %> with approaching deadlines.
+                                <a href="/goals?sort=deadline-soon" class="alert-link">View them now</a>
+                    </div>
+                    <% } %>
+
+                        <div class="dashboard-sections">
+                            <div class="dashboard-section">
+                                <h3>Recent Goals</h3>
+                                <% if (stats.recentGoals.length===0) { %>
+                                    <p class="empty-message">You don't have any goals yet. <a href="/goals/new">Create
+                                            your first goal</a>.</p>
+                                    <% } else { %>
+                                        <div class="mini-goals">
+                                            <% stats.recentGoals.forEach(goal=> { %>
+                                                <div class="mini-goal-card">
+                                                    <div class="mini-goal-header">
+                                                        <div class="mini-goal-icon <%= goal.type %>-icon"></div>
+                                                        <h4>
+                                                            <%= goal.title %>
+                                                        </h4>
+                                                    </div>
+                                                    <div class="mini-goal-details">
+                                                        <div class="mini-goal-date">Created: <%=
+                                                                formatDate(goal.createdAt) %>
+                                                        </div>
+                                                        <% if (goal.deadline) { %>
+                                                            <div
+                                                                class="mini-goal-deadline <%= isDeadlineApproaching(goal.deadline) ? 'deadline-approaching' : '' %>">
+                                                                Deadline: <%= formatDate(goal.deadline) %>
+                                                            </div>
+                                                            <% } %>
+                                                    </div>
+                                                    <div class="mini-progress">
+                                                        <div class="mini-progress-bar">
+                                                            <div class="mini-progress-fill"
+                                                                style="width: <%= goal.progress %>%"></div>
+                                                        </div>
+                                                        <div class="mini-progress-text">
+                                                            <%= goal.progress %>%
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+                                        </div>
+                                        <div class="view-all">
+                                            <a href="/goals" class="btn btn-secondary btn-sm">View All Goals</a>
+                                        </div>
+                                        <% } %>
+                            </div>
+
+                            <div class="dashboard-section">
+                                <h3>Goals by Type</h3>
+                                <div class="goal-types">
+                                    <div class="goal-type-item">
+                                        <div class="goal-type-icon weight-icon"></div>
+                                        <div class="goal-type-info">
+                                            <div class="goal-type-label">Weight</div>
+                                            <div class="goal-type-count">
+                                                <%= stats.goalsByType.weight %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="goal-type-item">
+                                        <div class="goal-type-icon running-icon"></div>
+                                        <div class="goal-type-info">
+                                            <div class="goal-type-label">Running</div>
+                                            <div class="goal-type-count">
+                                                <%= stats.goalsByType.running %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="goal-type-item">
+                                        <div class="goal-type-icon strength-icon"></div>
+                                        <div class="goal-type-info">
+                                            <div class="goal-type-label">Strength</div>
+                                            <div class="goal-type-count">
+                                                <%= stats.goalsByType.strength %>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="goal-type-item">
+                                        <div class="goal-type-icon other-icon"></div>
+                                        <div class="goal-type-info">
+                                            <div class="goal-type-label">Other</div>
+                                            <div class="goal-type-count">
+                                                <%= stats.goalsByType.other %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quick-actions">
+                            <h3>Quick Actions</h3>
+                            <div class="action-buttons">
+                                <a href="/goals/new" class="btn btn-primary">Add New Goal</a>
+                                <a href="/goals?status=completed" class="btn btn-secondary">View Completed</a>
+                                <a href="/goals?status=in-progress" class="btn btn-secondary">View In Progress</a>
+                                <a href="/goals?sort=deadline-soon" class="btn btn-secondary">View Upcoming
+                                    Deadlines</a>
+                            </div>
+                        </div>
+    </div>
+
+    <%- include('../partials/footer') %>

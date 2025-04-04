@@ -1,0 +1,85 @@
+<%- include('../partials/header') %>
+
+    <h2>Edit Fitness Goal</h2>
+
+    <% if (messages.error) { %>
+        <div class="alert alert-danger">
+            <%= messages.error %>
+        </div>
+        <% } %>
+
+            <div class="form-container">
+                <form action="/goals/<%= goal.id %>?_method=PUT<%= 
+    Object.entries(filters || {}).filter(([key, value]) => value).map(([key, value], index) => 
+      `${index === 0 ? '&' : '&'}${key}=${value}`
+    ).join('') 
+  %>" method="POST">
+                    <div class="form-group">
+                        <label for="title">Goal Title</label>
+                        <input type="text" id="title" name="title" value="<%= formData.title || goal.title %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Goal Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="weight" name="type" value="weight" <%=(formData.type==='weight'
+                                    || goal.type==='weight' ) ? 'checked' : '' %>>
+                                <label for="weight">Weight Loss/Gain</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="running" name="type" value="running"
+                                    <%=(formData.type==='running' || goal.type==='running' ) ? 'checked' : '' %>>
+                                <label for="running">Running Distance</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="strength" name="type" value="strength"
+                                    <%=(formData.type==='strength' || goal.type==='strength' ) ? 'checked' : '' %>>
+                                <label for="strength">Strength Training</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="other" name="type" value="other" <%=(formData.type==='other' ||
+                                    goal.type==='other' ) ? 'checked' : '' %>>
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentValue">Current Value</label>
+                            <input type="number" id="currentValue" name="currentValue" step="any"
+                                value="<%= formData.currentValue || goal.currentValue %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="target">Target Value</label>
+                            <input type="number" id="target" name="target" step="any"
+                                value="<%= formData.target || goal.target %>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unit">Unit</label>
+                        <input type="text" id="unit" name="unit" value="<%= formData.unit || goal.unit %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Deadline (optional)</label>
+                        <input type="date" id="deadline" name="deadline"
+                            value="<%= formData.deadline || goal.deadline || '' %>">
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/goals<%= 
+        Object.entries(filters || {}).filter(([key, value]) => value).length > 0 ? 
+        '?' + Object.entries(filters || {}).filter(([key, value]) => value).map(([key, value]) => 
+          `${key}=${value}`
+        ).join('&') : '' 
+      %>" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Goal</button>
+                    </div>
+                </form>
+            </div>
+
+            <%- include('../partials/footer') %>

@@ -1,0 +1,123 @@
+<%- include('../partials/header') %>
+
+    <h2>Create New Fitness Goal</h2>
+
+    <% if (messages.error) { %>
+        <div class="alert alert-danger">
+            <%= messages.error %>
+        </div>
+        <% } %>
+
+            <div class="form-container">
+                <form action="/goals" method="POST">
+                    <div class="form-group">
+                        <label for="title">Goal Title</label>
+                        <input type="text" id="title" name="title" placeholder="e.g., Lose weight for summer"
+                            value="<%= formData.title || '' %>" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Goal Type</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="weight" name="type" value="weight" <%=(formData.type==='weight'
+                                    || !formData.type) ? 'checked' : '' %>>
+                                <label for="weight">Weight Loss/Gain</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="running" name="type" value="running"
+                                    <%=formData.type==='running' ? 'checked' : '' %>>
+                                <label for="running">Running Distance</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="strength" name="type" value="strength"
+                                    <%=formData.type==='strength' ? 'checked' : '' %>>
+                                <label for="strength">Strength Training</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="other" name="type" value="other" <%=formData.type==='other'
+                                    ? 'checked' : '' %>>
+                                <label for="other">Other</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="currentValue">Current Value</label>
+                            <input type="number" id="currentValue" name="currentValue" step="any" placeholder="e.g., 75"
+                                value="<%= formData.currentValue || '' %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startValue">Starting Value (optional)</label>
+                            <input type="number" id="startValue" name="startValue" step="any"
+                                placeholder="Same as current if empty" value="<%= formData.startValue || '' %>">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="target">Target Value</label>
+                            <input type="number" id="target" name="target" step="any" placeholder="e.g., 65"
+                                value="<%= formData.target || '' %>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="unit">Unit</label>
+                            <input type="text" id="unit" name="unit" placeholder="e.g., kg, km, reps"
+                                value="<%= formData.unit || '' %>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadline">Deadline (optional)</label>
+                        <input type="date" id="deadline" name="deadline" min="<%= today %>"
+                            value="<%= formData.deadline || '' %>">
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/goals" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Create Goal</button>
+                    </div>
+                </form>
+            </div>
+
+            <script>
+                // Set default units based on type selection
+                document.addEventListener('DOMContentLoaded', function () {
+                    const typeRadios = document.querySelectorAll('input[name="type"]');
+                    const unitInput = document.getElementById('unit');
+
+                    function updateDefaultUnit() {
+                        const selectedType = document.querySelector('input[name="type"]:checked').value;
+
+                        // Only set default if unit is empty
+                        if (unitInput.value === '') {
+                            switch (selectedType) {
+                                case 'weight':
+                                    unitInput.value = 'kg';
+                                    break;
+                                case 'running':
+                                    unitInput.value = 'km';
+                                    break;
+                                case 'strength':
+                                    unitInput.value = 'reps';
+                                    break;
+                                default:
+                                    unitInput.value = '';
+                            }
+                        }
+                    }
+
+                    // Set initial default
+                    updateDefaultUnit();
+
+                    // Update when type changes
+                    typeRadios.forEach(radio => {
+                        radio.addEventListener('change', updateDefaultUnit);
+                    });
+                });
+            </script>
+
+            <%- include('../partials/footer') %>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Goal Tracker</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="container">
+                <a href="/" class="logo">Fitness Goal Tracker</a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="/" class="nav-link">Home</a></li>
+                        <% if (isAuthenticated) { %>
+                            <li><a href="/dashboard" class="nav-link">Dashboard</a></li>
+                            <li><a href="/goals" class="nav-link">My Goals</a></li>
+                            <li><a href="/goals/new" class="nav-link">Add Goal</a></li>
+                            <li><a href="/auth/logout" class="nav-link">Logout</a></li>
+                            <% } else { %>
+                                <li><a href="/auth/login" class="nav-link">Login</a></li>
+                                <li><a href="/auth/register" class="nav-link">Register</a></li>
+                                <% } %>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
